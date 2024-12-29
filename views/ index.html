@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>El hardi Auto publish</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            direction: rtl;
+        }
+
+        header {
+            background-color: #4CAF50; /* اللون الأخضر */
+            color: white;
+            padding: 15px 0;
+            text-align: center;
+            font-size: 24px;
+        }
+
+        .container {
+            width: 80%;
+            margin: 20px auto;
+            background-color: white;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        h1, h2 {
+            text-align: center;
+            color: #333;
+        }
+
+        .steps {
+            background-color: #f0f0f0;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .steps p {
+            font-size: 18px;
+            color: #555;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        input[type="text"], button {
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        footer {
+            text-align: center;
+            padding: 10px;
+            background-color: #333;
+            color: white;
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>El hardi Auto publish</h1>
+    </header>
+
+    <div class="container">
+        <div class="steps">
+            <h2>الخطوات التالية:</h2>
+            <p>1. أدخل رابط RSS لقناة يوتيوب.</p>
+            <p>2. أدخل رابط صفحة الفيسبوك الخاصة بك.</p>
+            <p>3. اضغط على "ربط" لنشر الفيديوهات تلقائيًا.</p>
+        </div>
+
+        <form id="rssForm">
+            <label for="rssLink">أدخل رابط RSS الخاص بالقناة:</label><br>
+            <input type="text" id="rssLink" name="rssLink" placeholder="رابط RSS"><br><br>
+            
+            <label for="facebookPage">أدخل رابط صفحة الفيسبوك:</label><br>
+            <input type="text" id="facebookPage" name="facebookPage" placeholder="رابط صفحة الفيسبوك"><br><br>
+            
+            <button type="submit">ربط</button>
+        </form>
+
+    </div>
+
+    <footer>
+        <p>&copy; 2024 El hardi Auto publish - جميع الحقوق محفوظة</p>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $("#rssForm").submit(function(event) {
+            event.preventDefault();
+            var rssLink = $("#rssLink").val();
+            var facebookPage = $("#facebookPage").val();
+
+            console.log("رابط RSS:", rssLink);
+            console.log("رابط صفحة الفيسبوك:", facebookPage);
+
+            // هنا يمكن إضافة الكود لإرسال البيانات إلى الخادم لمعالجتها
+        });
+    </script>
+</body>
+</html>
