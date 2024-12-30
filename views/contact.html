@@ -1,57 +1,67 @@
 <!-- contact.html -->
 <!DOCTYPE html>
 <html lang="ar">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>اتصل بنا | El hardi Auto publish</title>
-    <link rel="stylesheet" href="/public/style.css"> <!-- تعديل المسار ليتناسب مع بنية المشروع -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> <!-- تحميل مكتبة الأيقونات -->
+    <link rel="stylesheet" href="public/style.css">
 </head>
 
-<body>
-    <header>
-        <h1>اتصل بنا</h1>
-        <p>نحن هنا لخدمتك! إذا كان لديك أي استفسارات أو تعليقات، لا تتردد في التواصل معنا من خلال النموذج أو عبر منصاتنا المختلفة.</p>
-    </header>
+<body class="loading">
 
-    <section class="contact-form">
-        <h2>أرسل لنا رسالة</h2>
-        <form action="/submit-form" method="POST">
-            <label for="name">الاسم الكامل:</label>
-            <input type="text" id="name" name="name" required>
+    <!-- شاشة التحميل -->
+    <div class="loader">
+        <div class="spinner"></div>
+    </div>
 
+    <!-- تضمين الـ nav و header -->
+    <div class="nav">
+        <!-- نسخ محتوى nav.html هنا -->
+        <nav>
+            <ul>
+                <li><a href="/index.html">الصفحة الرئيسية</a></li>
+                <li><a href="/about.html">من نحن</a></li>
+                <li><a href="/services.html">خدماتنا</a></li>
+                <li><a href="/faq.html">الأسئلة الشائعة</a></li>
+                <li><a href="/layout.html">الهيكل الأساسي</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <div class="header">
+        <!-- نسخ محتوى header.html هنا -->
+        <header>
+            <h1>مرحبًا بك في El hardi Auto publish</h1>
+            <p>نحن هنا لنساعدك في أتمتة عملية نشر المحتوى الخاص بك بطريقة ذكية وسهلة. استمتع بتجربة النشر التلقائي على منصات متعددة بكفاءة عالية.</p>
+        </header>
+    </div>
+
+    <section class="contact">
+        <h2>اتصل بنا</h2>
+        <p>إذا كان لديك أي استفسار أو ترغب في المزيد من المعلومات، لا تتردد في التواصل معنا.</p>
+        <form>
+            <label for="name">الاسم:</label>
+            <input type="text" id="name" name="name" required><br><br>
             <label for="email">البريد الإلكتروني:</label>
-            <input type="email" id="email" name="email" required>
-
-            <label for="message">رسالتك:</label>
-            <textarea id="message" name="message" required></textarea>
-
-            <button type="submit" class="submit-btn">أرسل الرسالة</button>
+            <input type="email" id="email" name="email" required><br><br>
+            <label for="message">الرسالة:</label><br>
+            <textarea id="message" name="message" required></textarea><br><br>
+            <button type="submit">إرسال</button>
         </form>
     </section>
 
-    <section class="social-links">
-        <h2>تابعنا على منصات التواصل الاجتماعي:</h2>
-        <ul>
-            <li><a href="https://www.instagram.com/emperor_._1?igsh=enM4aG55Nmwwdmx2" class="social-btn instagram" target="_blank"><i class="fab fa-instagram"></i> Instagram</a></li>
-            <li><a href="https://www.facebook.com/profile.php?id=61564682586815&mibextid=ZbWKwL" class="social-btn facebook" target="_blank"><i class="fab fa-facebook"></i> Facebook</a></li>
-            <li><a href="https://x.com/Emperor_1_?s=08" class="social-btn twitter" target="_blank"><i class="fab fa-twitter"></i> Twitter</a></li>
-            <li><a href="https://wa.me/2120705406565?text=Hello%20Emperor,%20I%20come%20to%20you%20from%20your%20site%20El%20hardi%20Auto%20publish%20I%20want%20to%20contact%20you%20🥰" class="social-btn whatsapp" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp</a></li>
-            <li><a href="https://github.com/Emperor-1231" class="social-btn github" target="_blank"><i class="fab fa-github"></i> GitHub</a></li>
-            <li><a href="https://replit.com/@AbdoAkojdad" class="social-btn replit" target="_blank"><i class="fab fa-replit"></i> Replit</a></li>
-            <li><a href="https://www.linkedin.com/in/abdo-akojdad-71176a318" class="social-btn linkedin" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a></li>
-            <li><a href="mailto:abdoakojdad@gmail.com" class="social-btn email" target="_blank"><i class="fas fa-envelope"></i> Email</a></li>
-        </ul>
-    </section>
+    <!-- تضمين الـ footer -->
+    <div class="footer">
+        <!-- نسخ محتوى footer.html هنا -->
+        <footer>
+            <p>&copy; 2024 El hardi Auto publish. جميع الحقوق محفوظة. تم التطوير بواسطة <strong>الإمبراطور عبد الرحمـٰن الهردي</strong>.</p>
+            <p>لمزيد من المعلومات، تواصل معنا عبر <a href="/contact.html">اتصل بنا</a>.</p>
+        </footer>
+    </div>
 
-    <footer>
-        <p>&copy; 2024 El hardi Auto publish. جميع الحقوق محفوظة. تم التطوير بواسطة <strong>الإمبراطور عبد الرحمـٰن الهردي</strong>.</p>
-    </footer>
+    <script src="public/script.js"></script>
 
-    <script src="/public/script.js"></script> <!-- تعديل المسار ليتناسب مع بنية المشروع -->
 </body>
-
 </html>
