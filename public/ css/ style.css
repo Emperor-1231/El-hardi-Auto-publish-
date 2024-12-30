@@ -1,150 +1,149 @@
-/* إعدادات الخطوط الأساسية */
+/* التنسيق الأساسي */
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 body {
-  background-color: #f4f4f4;
-  color: #333;
-  line-height: 1.6;
-  font-size: 16px;
-  direction: rtl; /* للتأكد من دعم الكتابة من اليمين لليسار */
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    background-color: #f4f4f4;
+    color: #333;
 }
 
-/* تصميم الهيدر */
 header {
-  background-color: #2c3e50;
-  padding: 20px;
+    background-color: #333;
+    color: white;
+    padding: 20px;
+    text-align: center;
 }
 
-header nav ul {
-  list-style: none;
-  display: flex;
-  justify-content: center;
+header .logo-container img {
+    width: 150px;
 }
 
-header nav ul li {
-  margin: 0 15px;
+header .navbar {
+    margin-top: 15px;
 }
 
-header nav ul li a {
-  text-decoration: none;
-  color: white;
-  font-weight: bold;
-  font-size: 18px;
+header .navbar ul {
+    list-style: none;
 }
 
-header nav ul li a:hover {
-  text-decoration: underline;
+header .navbar ul li {
+    display: inline-block;
+    margin: 0 15px;
 }
 
-/* تصميم الهيرو */
+header .navbar ul li a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+header .auth-buttons button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    margin-top: 10px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+header .auth-buttons button:hover {
+    background-color: #45a049;
+}
+
+/* Hero section */
 .hero {
-  background: #3498db;
-  color: white;
-  padding: 50px 0;
-  text-align: center;
+    background-image: url('/images/hero-bg.jpg');
+    background-size: cover;
+    background-position: center;
+    height: 400px;
+    color: white;
+    text-align: center;
+    padding-top: 150px;
 }
 
 .hero h1 {
-  font-size: 36px;
-  margin-bottom: 20px;
+    font-size: 3rem;
+    margin-bottom: 20px;
 }
 
 .hero p {
-  font-size: 20px;
-  margin-bottom: 30px;
+    font-size: 1.5rem;
+    margin-bottom: 30px;
 }
 
-.auth-buttons {
-  display: flex;
-  justify-content: center;
-  gap: 20px;
-}
-
-.auth-buttons button {
-  padding: 10px 20px;
-  font-size: 16px;
-  cursor: pointer;
-  border: none;
-  border-radius: 5px;
-  transition: background-color 0.3s ease;
-}
-
-.auth-buttons button:hover {
-  background-color: #2980b9;
-}
-
-/* تصميم معلومات التطبيق */
-.info {
-  padding: 40px;
-  background-color: #ecf0f1;
-}
-
-.info h2 {
-  font-size: 28px;
-  margin-bottom: 20px;
-}
-
-.info ul {
-  list-style-type: none;
-  line-height: 1.8;
-}
-
-.info ul li {
-  font-size: 18px;
-  margin-bottom: 10px;
-}
-
-/* تصميم الفوتر */
-footer {
-  background-color: #2c3e50;
-  color: white;
-  padding: 20px;
-  text-align: center;
-}
-
-footer .footer-container {
-  font-size: 14px;
-}
-
-footer a {
-  text-decoration: none;
-  color: #ecf0f1;
-}
-
-footer a:hover {
-  text-decoration: underline;
-}
-
-/* استجابة للموقع */
-@media (max-width: 768px) {
-  .hero h1 {
-    font-size: 28px;
-  }
-
-  .hero p {
+.hero .cta-btn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 12px 30px;
+    text-decoration: none;
     font-size: 18px;
-  }
+}
 
-  .auth-buttons {
-    flex-direction: column;
-  }
+.hero .cta-btn:hover {
+    background-color: #45a049;
+}
 
-  .auth-buttons button {
-    width: 100%;
-    margin-bottom: 10px;
-  }
+/* Features section */
+.features {
+    padding: 50px 0;
+    text-align: center;
+}
 
-  header nav ul {
-    flex-direction: column;
-    align-items: center;
-  }
+.features h2 {
+    font-size: 2.5rem;
+    margin-bottom: 30px;
+}
 
-  header nav ul li {
-    margin: 10px 0;
-  }
+.feature {
+    display: inline-block;
+    width: 30%;
+    padding: 20px;
+    margin: 0 10px;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.feature h3 {
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+}
+
+.feature p {
+    font-size: 1.2rem;
+}
+
+/* About section */
+.about {
+    padding: 50px 20px;
+    background-color: #f4f4f4;
+    text-align: center;
+}
+
+.about h2 {
+    font-size: 2.5rem;
+    margin-bottom: 30px;
+}
+
+.about p {
+    font-size: 1.2rem;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/* Footer */
+footer {
+    background-color: #333;
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+footer p {
+    font-size: 1rem;
 }
