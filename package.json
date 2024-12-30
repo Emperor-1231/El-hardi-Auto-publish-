@@ -1,7 +1,7 @@
 {
   "name": "el-hardi-auto-publish",
   "version": "1.0.0",
-  "description": "El Hardi Auto Publish platform developed by the great Emperor Abdul Rahman Al-Hurdi.",
+  "description": "El Hardi Auto Publish platform developed by the great Emperor Abderrahmane Al-Hourdi.",
   "main": "app.js",
   "scripts": {
     "start": "node app.js", 
