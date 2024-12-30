@@ -1,16 +1,35 @@
+// استيراد المكتبات
 const express = require('express');
+const app = express();
 const path = require('path');
 
-const app = express();
+// إعدادات Firebase
+const { initializeApp } = require("firebase/app");
+const { getAuth, signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider } = require("firebase/auth");
 
-// Serve public folder
-app.use('/public', express.static(path.join(__dirname, 'public')));
+const firebaseConfig = {
+  apiKey: "AIzaSyC0jbvoclp54WAeKPEjwL9TqLme1FETK9Q",
+  authDomain: "el-hardi-auto-publish.firebaseapp.com",
+  projectId: "el-hardi-auto-publish",
+  storageBucket: "el-hardi-auto-publish.firebasestorage.app",
+  messagingSenderId: "804047155992",
+  appId: "1:804047155992:web:408a8aea01af1481dca46d"
+};
 
-// Serve views folder
+// تهيئة Firebase
+const firebaseApp = initializeApp(firebaseConfig);
+const auth = getAuth(firebaseApp);
+
+// إعداد مسار الواجهة
+app.use(express.static(path.join(__dirname, 'public')));
+
+// عرض صفحة index.html
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'views', 'index.html'));
+  res.sendFile(path.join(__dirname, '/views/index.html'));
 });
 
-// Start the server
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+// تشغيل السيرفر
+const port = 3000;
+app.listen(port, () => {
+  console.log(`Server running on http://localhost:${port}`);
+});
