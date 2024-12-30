@@ -4,76 +4,22 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>El Hardi Auto Publish</title>
-  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="/public/css/style.css"> <!-- مسار ملف CSS -->
 </head>
 <body>
 
-  <div class="container">
-    <h1>مرحبًا بكم في El Hardi Auto Publish</h1>
+  <!-- محتوى الصفحة هنا -->
+  <h1>مرحبًا بك في El Hardi Auto Publish</h1>
 
-    <div class="auth-buttons">
-      <button id="google-sign-in">تسجيل الدخول باستخدام جوجل</button>
-      <button id="email-sign-in">تسجيل الدخول باستخدام البريد الإلكتروني</button>
-    </div>
-
+  <div id="auth-container">
+    <button id="google-sign-in">تسجيل الدخول باستخدام جوجل</button>
+    <button id="email-sign-in">تسجيل الدخول باستخدام البريد الإلكتروني</button>
     <div id="user-info" style="display:none;">
-      <p>مرحبًا، <span id="user-name"></span></p>
+      <p>مرحبًا، <span id="user-name"></span>!</p>
       <button id="sign-out">تسجيل الخروج</button>
     </div>
   </div>
 
-  <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-app.js";
-    import { getAuth, signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider, signOut } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-auth.js";
-
-    const firebaseConfig = {
-      apiKey: "AIzaSyC0jbvoclp54WAeKPEjwL9TqLme1FETK9Q",
-      authDomain: "el-hardi-auto-publish.firebaseapp.com",
-      projectId: "el-hardi-auto-publish",
-      storageBucket: "el-hardi-auto-publish.firebasestorage.app",
-      messagingSenderId: "804047155992",
-      appId: "1:804047155992:web:408a8aea01af1481dca46d"
-    };
-
-    const app = initializeApp(firebaseConfig);
-    const auth = getAuth(app);
-    const googleProvider = new GoogleAuthProvider();
-
-    // التفاعل مع الأزرار
-    document.getElementById('google-sign-in').addEventListener('click', async () => {
-      try {
-        const result = await signInWithPopup(auth, googleProvider);
-        const user = result.user;
-        document.getElementById('user-name').textContent = user.displayName;
-        document.getElementById('user-info').style.display = 'block';
-      } catch (error) {
-        console.error(error);
-      }
-    });
-
-    document.getElementById('email-sign-in').addEventListener('click', () => {
-      const email = prompt('أدخل بريدك الإلكتروني:');
-      const password = prompt('أدخل كلمة المرور:');
-      
-      signInWithEmailAndPassword(auth, email, password)
-        .then((userCredential) => {
-          const user = userCredential.user;
-          document.getElementById('user-name').textContent = user.email;
-          document.getElementById('user-info').style.display = 'block';
-        })
-        .catch((error) => {
-          console.error(error);
-        });
-    });
-
-    document.getElementById('sign-out').addEventListener('click', () => {
-      signOut(auth).then(() => {
-        document.getElementById('user-info').style.display = 'none';
-        console.log("تم تسجيل الخروج بنجاح");
-      }).catch((error) => {
-        console.error(error);
-      });
-    });
-  </script>
+  <script src="/public/js/script.js" type="module"></script> <!-- مسار ملف JS -->
 </body>
 </html>
