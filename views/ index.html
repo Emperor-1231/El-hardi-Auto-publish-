@@ -1,57 +1,69 @@
 <!DOCTYPE html>
 <html lang="ar">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>El Hardi Auto Publish</title>
-  <link rel="stylesheet" href="/css/style.css">
-  <link rel="icon" type="image/png" href="/images/favicon.png">
-  <script src="https://www.gstatic.com/firebasejs/9.1.0/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.1.0/firebase-auth.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>El Hardi Auto Publish</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="icon" type="image/png" href="/images/favicon.png">
+    <meta name="description" content="أداة نشر تلقائي مبتكرة بواسطة El Hardi. لتحسين تجربتك الرقمية.">
 </head>
 <body>
-  <header>
-    <nav>
-      <ul>
-        <li><a href="/">الصفحة الرئيسية</a></li>
-        <li><a href="/about">عن التطبيق</a></li>
-        <li><a href="/contact">اتصل بنا</a></li>
-      </ul>
-    </nav>
-  </header>
-  
-  <div class="container">
-    <section class="hero">
-      <h1>مرحبًا بك في تطبيق El Hardi Auto Publish</h1>
-      <p>قم بتسجيل الدخول باستخدام أحد الخيارات التالية:</p>
-      <div class="auth-buttons">
-        <button id="googleSignInBtn">تسجيل الدخول باستخدام جوجل</button>
-        <button id="emailSignInBtn">تسجيل الدخول باستخدام البريد الإلكتروني</button>
-      </div>
-    </section>
 
-    <section class="info">
-      <h2>مميزات التطبيق:</h2>
-      <ul>
-        <li>نشر تلقائي عبر مختلف المنصات.</li>
-        <li>سهولة الاستخدام وواجهة مستخدم تفاعلية.</li>
-        <li>دعم كامل للغات متعددة بما في ذلك العربية والإنجليزية.</li>
-      </ul>
-    </section>
+    <header class="header">
+        <div class="logo-container">
+            <img src="/images/logo.png" alt="El Hardi Auto Publish" class="logo">
+        </div>
+        <nav class="navbar">
+            <ul>
+                <li><a href="/">الرئيسية</a></li>
+                <li><a href="/features">الميزات</a></li>
+                <li><a href="/about">عن التطبيق</a></li>
+                <li><a href="/contact">اتصل بنا</a></li>
+            </ul>
+        </nav>
+        <div class="auth-buttons">
+            <button id="google-login">تسجيل الدخول باستخدام جوجل</button>
+            <button id="email-login">تسجيل الدخول بالبريد الإلكتروني</button>
+        </div>
+    </header>
 
-    <section class="footer-info">
-      <p>مطور: El Hardi Tech</p>
-      <p>&copy; 2024 جميع الحقوق محفوظة</p>
-    </section>
-  </div>
+    <main>
+        <section class="hero">
+            <div class="hero-content">
+                <h1>أداة النشر التلقائي الأكثر ابتكارًا</h1>
+                <p>ساعد نفسك على نشر المحتوى بذكاء، بسرعة، واحترافية!</p>
+                <a href="/features" class="cta-btn">اكتشف المزيد</a>
+            </div>
+        </section>
 
-  <footer>
-    <div class="footer-container">
-      <p>&copy; 2024 El Hardi Auto Publish - كل الحقوق محفوظة.</p>
-      <p>تطوير بواسطة <a href="https://www.elhardi.com">El Hardi Tech</a></p>
-    </div>
-  </footer>
+        <section class="features">
+            <h2>ميزات التطبيق</h2>
+            <div class="feature">
+                <h3>نشر تلقائي</h3>
+                <p>نشر المحتوى تلقائيًا عبر منصات متعددة بلمسة واحدة.</p>
+            </div>
+            <div class="feature">
+                <h3>إدارة حسابات متعددة</h3>
+                <p>قم بإدارة جميع حساباتك بكل سهولة ويسر.</p>
+            </div>
+        </section>
 
-  <script src="/js/script.js"></script>
+        <section class="about">
+            <h2>عن التطبيق</h2>
+            <p>تطبيق "El Hardi Auto Publish" هو أداة مبتكرة تهدف إلى تحسين تجارب النشر على الإنترنت من خلال أتمتة عمليات النشر عبر منصات مختلفة. باحترافية وموثوقية.</p>
+        </section>
+
+        <section class="contact">
+            <h2>اتصل بنا</h2>
+            <p>إذا كانت لديك أي استفسارات أو تعليقات، لا تتردد في التواصل معنا.</p>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 El Hardi Auto Publish. جميع الحقوق محفوظة.</p>
+    </footer>
+
+    <script src="/js/script.js"></script>
 </body>
 </html>
