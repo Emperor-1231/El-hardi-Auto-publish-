@@ -1,38 +1,38 @@
-// انتظر تحميل DOM بالكامل قبل تنفيذ أي أكواد
+// الانتظار حتى تحميل الصفحة بالكامل
 document.addEventListener('DOMContentLoaded', () => {
-  // جلب العناصر الضرورية
+  // تحديد العناصر التي ستتفاعل معها
   const loginWithGoogleBtn = document.querySelector('#login-google');
   const loginWithEmailBtn = document.querySelector('#login-email');
   const infoSection = document.querySelector('.info');
   const heroSection = document.querySelector('.hero');
 
-  // التعامل مع زر تسجيل الدخول باستخدام جوجل
+  // عندما يتم الضغط على زر تسجيل الدخول باستخدام جوجل
   loginWithGoogleBtn.addEventListener('click', (event) => {
     event.preventDefault();
-    alert('تم الضغط على زر تسجيل الدخول باستخدام جوجل');
-    // هنا يمكن إضافة الكود الخاص بتسجيل الدخول عبر جوجل
+    showModal('تم الضغط على زر تسجيل الدخول باستخدام جوجل');
+    // هنا يمكن إضافة الكود الخاص بتسجيل الدخول باستخدام جوجل
   });
 
-  // التعامل مع زر تسجيل الدخول باستخدام البريد الإلكتروني
+  // عندما يتم الضغط على زر تسجيل الدخول باستخدام البريد الإلكتروني
   loginWithEmailBtn.addEventListener('click', (event) => {
     event.preventDefault();
-    alert('تم الضغط على زر تسجيل الدخول باستخدام البريد الإلكتروني');
+    showModal('تم الضغط على زر تسجيل الدخول باستخدام البريد الإلكتروني');
     // هنا يمكن إضافة الكود الخاص بتسجيل الدخول عبر البريد الإلكتروني
   });
 
-  // إضافة تأثير عند التمرير على قسم المعلومات
+  // التمرير على قسم المعلومات لإظهار تأثيرات التمرير
   window.addEventListener('scroll', () => {
     let scrollPosition = window.scrollY;
-
-    // إذا كانت المسافة المقطوعة على الصفحة أكبر من 200px، يتم إضافة تأثير
     if (scrollPosition > 200) {
       infoSection.classList.add('fade-in');
+      infoSection.classList.remove('fade-out'); // إزالة أي تأثير تلاشي قديم
     } else {
       infoSection.classList.remove('fade-in');
+      infoSection.classList.add('fade-out');
     }
   });
 
-  // إضافة تأثير عند التمرير على قسم الهيرو
+  // تأثيرات التمرير على قسم الهيرو
   heroSection.addEventListener('mouseover', () => {
     heroSection.style.backgroundColor = '#2980b9'; // تغيير اللون عند المرور
     heroSection.style.transition = 'background-color 0.3s ease';
@@ -42,9 +42,8 @@ document.addEventListener('DOMContentLoaded', () => {
     heroSection.style.backgroundColor = '#3498db'; // العودة إلى اللون الأصلي
   });
 
-  // إضافة وظيفة لتنقل المستخدم بشكل سلس عبر الأقسام
+  // إضافة انتقال سلس بين الأقسام
   const navLinks = document.querySelectorAll('header nav ul li a');
-  
   navLinks.forEach(link => {
     link.addEventListener('click', (e) => {
       e.preventDefault();
@@ -57,4 +56,23 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     });
   });
+
+  // وظيفة لعرض نافذة منبثقة (Modal) عند النقر على زر
+  function showModal(message) {
+    const modal = document.createElement('div');
+    modal.classList.add('modal');
+    modal.innerHTML = `
+      <div class="modal-content">
+        <span class="close-btn">&times;</span>
+        <p>${message}</p>
+      </div>
+    `;
+    document.body.appendChild(modal);
+
+    // إغلاق النافذة عند النقر على زر الإغلاق
+    const closeBtn = modal.querySelector('.close-btn');
+    closeBtn.addEventListener('click', () => {
+      modal.remove();
+    });
+  }
 });
