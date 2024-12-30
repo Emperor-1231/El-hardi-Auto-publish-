@@ -1,57 +1,68 @@
 // الانتظار حتى تحميل الصفحة بالكامل
 document.addEventListener('DOMContentLoaded', () => {
-  // تحديد الأزرار والعناصر التي ستتفاعل معها
-  const loginWithGoogleBtn = document.querySelector('#login-google');
-  const loginWithEmailBtn = document.querySelector('#login-email');
-  const infoSection = document.querySelector('.info');
-  const heroSection = document.querySelector('.hero');
-  
-  // تغيير تفاعل الأزرار
-  loginWithGoogleBtn.addEventListener('mouseenter', () => {
-    loginWithGoogleBtn.classList.add('hovered');
+  // الحصول على العناصر التي ستتفاعل معها
+  const submitButton = document.querySelector('#submit-button');
+  const scrollableSections = document.querySelectorAll('.scrollable');
+  const dynamicText = document.querySelectorAll('.dynamic-text');
+
+  // تفعيل تأثيرات الأزرار بشكل احترافي
+  submitButton.addEventListener('mouseenter', () => {
+    submitButton.classList.add('btn-hover');
   });
 
-  loginWithGoogleBtn.addEventListener('mouseleave', () => {
-    loginWithGoogleBtn.classList.remove('hovered');
+  submitButton.addEventListener('mouseleave', () => {
+    submitButton.classList.remove('btn-hover');
   });
 
-  loginWithEmailBtn.addEventListener('mouseenter', () => {
-    loginWithEmailBtn.classList.add('hovered');
+  // إضافة تأثيرات فنية للنصوص
+  dynamicText.forEach((textElement) => {
+    textElement.addEventListener('mouseover', () => {
+      textElement.classList.add('highlight-text');
+    });
+
+    textElement.addEventListener('mouseout', () => {
+      textElement.classList.remove('highlight-text');
+    });
   });
 
-  loginWithEmailBtn.addEventListener('mouseleave', () => {
-    loginWithEmailBtn.classList.remove('hovered');
-  });
-
-  // التعامل مع حدث التمرير
+  // تفعيل تأثيرات التمرير
   window.addEventListener('scroll', () => {
-    let scrollPosition = window.scrollY;
-    if (scrollPosition > 200) {
-      infoSection.classList.add('fade-in');
-      infoSection.classList.remove('fade-out');
-    } else {
-      infoSection.classList.remove('fade-in');
-      infoSection.classList.add('fade-out');
+    scrollableSections.forEach((section) => {
+      let sectionTop = section.offsetTop;
+      let scrollPosition = window.scrollY;
+
+      if (scrollPosition > sectionTop - 200) {
+        section.classList.add('fade-in');
+      } else {
+        section.classList.remove('fade-in');
+      }
+    });
+  });
+
+  // إضافة تأثيرات الحركات المتحركة للعناصر المتنقلة
+  function addScrollEffect(element, effectClass) {
+    const elementPosition = element.getBoundingClientRect().top;
+    const windowHeight = window.innerHeight;
+
+    if (elementPosition < windowHeight - 100) {
+      element.classList.add(effectClass);
     }
-    
-    // إضافة تأثير Parallax عند التمرير
-    heroSection.style.transform = `translateY(${scrollPosition * 0.5}px)`;
+  }
+
+  const animatedElements = document.querySelectorAll('.animated-element');
+  window.addEventListener('scroll', () => {
+    animatedElements.forEach((element) => {
+      addScrollEffect(element, 'show');
+    });
   });
 
-  // فتح نافذة منبثقة عند الضغط على الأزرار
-  loginWithGoogleBtn.addEventListener('click', (event) => {
-    event.preventDefault();
-    showModal('تم الضغط على زر تسجيل الدخول باستخدام جوجل');
-    // هنا يمكن إضافة الكود الخاص بتسجيل الدخول باستخدام جوجل
+  // إظهار نافذة منبثقة عند الضغط على زر submit
+  submitButton.addEventListener('click', (e) => {
+    e.preventDefault();
+    showModal('تم إرسال الطلب بنجاح!');
   });
 
-  loginWithEmailBtn.addEventListener('click', (event) => {
-    event.preventDefault();
-    showModal('تم الضغط على زر تسجيل الدخول باستخدام البريد الإلكتروني');
-    // هنا يمكن إضافة الكود الخاص بتسجيل الدخول عبر البريد الإلكتروني
-  });
-
-  // وظيفة لتخصيص التفاعل مع النوافذ المنبثقة
+  // دالة لعرض نافذة منبثقة
   function showModal(message) {
     const modal = document.createElement('div');
     modal.classList.add('modal');
@@ -63,37 +74,21 @@ document.addEventListener('DOMContentLoaded', () => {
     `;
     document.body.appendChild(modal);
 
-    // إغلاق النافذة عند النقر على زر الإغلاق
     const closeBtn = modal.querySelector('.close-btn');
     closeBtn.addEventListener('click', () => {
       modal.remove();
     });
   }
 
-  // وظيفة الانتقال بين الأقسام مع التأثيرات
-  const navLinks = document.querySelectorAll('header nav ul li a');
-  navLinks.forEach(link => {
-    link.addEventListener('click', (e) => {
-      e.preventDefault();
-      const targetId = link.getAttribute('href').substring(1);
-      const targetSection = document.getElementById(targetId);
+  // إضافة تأثيرات النصوص المتحركة
+  const marqueeText = document.querySelector('.marquee-text');
+  let currentIndex = 0;
+  const textList = ["مرحبا بكم في الموقع", "أفضل تجربة تفاعلية هنا", "ابدأ رحلتك الآن"];
 
-      window.scrollTo({
-        top: targetSection.offsetTop,
-        behavior: 'smooth'
-      });
-    });
-  });
+  function updateMarquee() {
+    marqueeText.innerText = textList[currentIndex];
+    currentIndex = (currentIndex + 1) % textList.length;
+  }
 
-  // تحسين النصوص المعروضة بتأثيرات CSS ديناميكية
-  const dynamicText = document.querySelectorAll('.dynamic-text');
-  dynamicText.forEach((el, index) => {
-    el.addEventListener('mouseover', () => {
-      el.classList.add('highlight');
-    });
-
-    el.addEventListener('mouseleave', () => {
-      el.classList.remove('highlight');
-    });
-  });
+  setInterval(updateMarquee, 3000);  // تغيير النصوص كل 3 ثواني
 });
