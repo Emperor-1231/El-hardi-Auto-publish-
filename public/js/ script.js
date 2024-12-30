@@ -1,67 +1,56 @@
-// Import Firebase
+// استيراد مكتبات Firebase
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-app.js";
-import { getAuth, signInWithPopup, GoogleAuthProvider, signInWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-auth.js";
+import { getAuth, signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider, signOut } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-auth.js";
 
-// Firebase configuration
+// إعدادات Firebase
 const firebaseConfig = {
-    apiKey: "AIzaSyC0jbvoclp54WAeKPEjwL9TqLme1FETK9Q",
-    authDomain: "el-hardi-auto-publish.firebaseapp.com",
-    projectId: "el-hardi-auto-publish",
-    storageBucket: "el-hardi-auto-publish.firebasestorage.app",
-    messagingSenderId: "804047155992",
-    appId: "1:804047155992:web:408a8aea01af1481dca46d"
+  apiKey: "AIzaSyC0jbvoclp54WAeKPEjwL9TqLme1FETK9Q",
+  authDomain: "el-hardi-auto-publish.firebaseapp.com",
+  projectId: "el-hardi-auto-publish",
+  storageBucket: "el-hardi-auto-publish.firebasestorage.app",
+  messagingSenderId: "804047155992",
+  appId: "1:804047155992:web:408a8aea01af1481dca46d"
 };
 
-// Initialize Firebase
+// تهيئة Firebase
 const app = initializeApp(firebaseConfig);
-const auth = getAuth();
+const auth = getAuth(app);
+const googleProvider = new GoogleAuthProvider();
 
-// Google Sign-In
-const googleSignInBtn = document.getElementById("google-signin-btn");
-googleSignInBtn.addEventListener("click", () => {
-    const provider = new GoogleAuthProvider();
-    signInWithPopup(auth, provider)
-        .then(result => {
-            const user = result.user;
-            showUserInfo(user.displayName);
-        })
-        .catch(error => {
-            console.error(error);
-        });
+// التفاعل مع الأزرار لتسجيل الدخول باستخدام جوجل
+document.getElementById('google-sign-in').addEventListener('click', async () => {
+  try {
+    const result = await signInWithPopup(auth, googleProvider);
+    const user = result.user;
+    document.getElementById('user-name').textContent = user.displayName;
+    document.getElementById('user-info').style.display = 'block';
+  } catch (error) {
+    console.error(error);
+  }
 });
 
-// Email/Password Login
-const emailLoginForm = document.getElementById("email-login-form");
-emailLoginForm.addEventListener("submit", e => {
-    e.preventDefault();
-    const email = document.getElementById("email").value;
-    const password = document.getElementById("password").value;
-    signInWithEmailAndPassword(auth, email, password)
-        .then(userCredential => {
-            const user = userCredential.user;
-            showUserInfo(user.email);
-        })
-        .catch(error => {
-            console.error(error);
-        });
+// التفاعل مع الأزرار لتسجيل الدخول باستخدام البريد الإلكتروني
+document.getElementById('email-sign-in').addEventListener('click', () => {
+  const email = prompt('أدخل بريدك الإلكتروني:');
+  const password = prompt('أدخل كلمة المرور:');
+  
+  signInWithEmailAndPassword(auth, email, password)
+    .then((userCredential) => {
+      const user = userCredential.user;
+      document.getElementById('user-name').textContent = user.email;
+      document.getElementById('user-info').style.display = 'block';
+    })
+    .catch((error) => {
+      console.error(error);
+    });
 });
 
-// Show User Info
-const showUserInfo = (userName) => {
-    document.getElementById("login-container").style.display = "none";
-    document.getElementById("user-info").style.display = "block";
-    document.getElementById("user-name").textContent = userName;
-};
-
-// Logout
-const logoutBtn = document.getElementById("logout-btn");
-logoutBtn.addEventListener("click", () => {
-    signOut(auth)
-        .then(() => {
-            document.getElementById("login-container").style.display = "block";
-            document.getElementById("user-info").style.display = "none";
-        })
-        .catch(error => {
-            console.error(error);
-        });
+// التفاعل مع زر تسجيل الخروج
+document.getElementById('sign-out').addEventListener('click', () => {
+  signOut(auth).then(() => {
+    document.getElementById('user-info').style.display = 'none';
+    console.log("تم تسجيل الخروج بنجاح");
+  }).catch((error) => {
+    console.error(error);
+  });
 });
