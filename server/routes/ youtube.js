@@ -1,81 +1,79 @@
-// استيراد المكتبات الأساسية
+// routes/YouTube.js
 const express = require('express');
-const axios = require('axios');
 const router = express.Router();
 
-// مفتاح YouTube Data API
-const API_KEY = 'AIzaSyCn7D_s4IA63f9pBJDzMHT1Xzn7c9FYd8A';
-
-// استدعاء البيانات من YouTube
-router.post('/fetch', async (req, res) => {
+// مسار لتحميل الفيديوهات
+router.get('/videos', (req, res) => {
+  // هنا يتم استخراج الفيديوهات من قاعدة البيانات أو API
   try {
-    const { rssLink } = req.body;
-
-    if (!rssLink) {
-      return res.status(400).json({
-        success: false,
-        message: 'يرجى تقديم رابط RSS الخاص بالقناة.'
-      });
-    }
-
-    // استخراج معرف القناة أو القائمة
-    const channelId = extractChannelId(rssLink);
-    const playlistId = extractPlaylistId(rssLink);
-
-    if (!channelId && !playlistId) {
-      return res.status(400).json({
-        success: false,
-        message: 'الرابط المقدم غير صالح، المرجوا التأكد من صلاحية الرابط والمحاولة مرة أخرى.'
-      });
-    }
-
-    const youtubeUrl = playlistId
-      ? `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=${playlistId}&maxResults=10&key=${API_KEY}`
-      : `https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=${channelId}&order=date&type=video&maxResults=10&key=${API_KEY}`;
-
-    const response = await axios.get(youtubeUrl);
-
-    const videos = response.data.items.map((item) => ({
-      title: item.snippet.title,
-      description: item.snippet.description,
-      thumbnail: item.snippet.thumbnails.high.url,
-      videoId: item.snippet.resourceId?.videoId || item.id.videoId,
-      publishedAt: item.snippet.publishedAt,
-      playlist: playlistId ? true : false
-    }));
-
-    res.status(200).json({
-      success: true,
-      message: 'تم جلب الفيديوهات بنجاح.',
-      videos
+    res.json({
+      message: 'تم جلب الفيديوهات بنجاح',
+      videos: [
+        { id: 1, title: 'فيديو 1', url: 'https://example.com/video1' },
+        { id: 2, title: 'فيديو 2', url: 'https://example.com/video2' }
+      ]
     });
   } catch (error) {
-    console.error('Error fetching YouTube data:', error);
-
-    const message =
-      error.response?.status === 403
-        ? 'لقد تجاوزت الحد المسموح به للطلبات باستخدام YouTube API. يرجى المحاولة لاحقًا.'
-        : 'حدث خطأ أثناء جلب البيانات. يرجى المحاولة لاحقًا.';
-
-    res.status(500).json({
-      success: false,
-      message
-    });
+    console.error('Error fetching videos:', error);
+    res.status(500).json({ message: 'خطأ في جلب الفيديوهات' });
   }
 });
 
-// استخراج معرف القناة
-function extractChannelId(rssLink) {
-  const regex = /channel\/([A-Za-z0-9_-]+)/;
-  const match = rssLink.match(regex);
-  return match ? match[1] : null;
-}
+// مسار لتحميل تفاصيل الفيديو
+router.get('/videos/:id', (req, res) => {
+  const videoId = req.params.id;
+  try {
+    // هنا يتم جلب تفاصيل الفيديو باستخدام الفيديو ID
+    res.json({
+      message: 'تم جلب تفاصيل الفيديو بنجاح',
+      video: {
+        id: videoId,
+        title: `تفاصيل الفيديو ${videoId}`,
+        description: 'وصف الفيديو'
+      }
+    });
+  } catch (error) {
+    console.error('Error fetching video details:', error);
+    res.status(500).json({ message: 'خطأ في جلب تفاصيل الفيديو' });
+  }
+});
 
-// استخراج معرف القائمة
-function extractPlaylistId(rssLink) {
-  const regex = /playlist\?list=([A-Za-z0-9_-]+)/;
-  const match = rssLink.match(regex);
-  return match ? match[1] : null;
-}
+// مسار لتحميل التعليقات الخاصة بالفيديو
+router.get('/comments/:videoId', (req, res) => {
+  const videoId = req.params.videoId;
+  try {
+    // هنا يتم جلب التعليقات للفيديو من قاعدة البيانات
+    res.json({
+      message: 'تم جلب التعليقات بنجاح',
+      comments: [
+        { id: 1, user: 'مستخدم 1', comment: 'تعليق رائع!' },
+        { id: 2, user: 'مستخدم 2', comment: 'محتوى ممتاز!' }
+      ]
+    });
+  } catch (error) {
+    console.error('Error fetching comments:', error);
+    res.status(500).json({ message: 'خطأ في جلب التعليقات' });
+  }
+});
+
+// مسار لإضافة تعليق على الفيديو
+router.post('/comments/:videoId', (req, res) => {
+  const videoId = req.params.videoId;
+  const { comment } = req.body;
+  if (!comment) {
+    return res.status(400).json({ message: 'التعليق مطلوب' });
+  }
+
+  try {
+    // هنا يتم إضافة التعليق إلى قاعدة البيانات
+    res.json({
+      message: 'تم إضافة التعليق بنجاح',
+      comment: { videoId, comment }
+    });
+  } catch (error) {
+    console.error('Error posting comment:', error);
+    res.status(500).json({ message: 'خطأ في إضافة التعليق' });
+  }
+});
 
 module.exports = router;
