@@ -1,4 +1,4 @@
-// استيراد الحزم الضرورية
+// app.js
 const express = require('express');
 const path = require('path');
 const firebase = require('firebase-admin');
@@ -26,77 +26,58 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // إعداد المسارات للموقع
 app.use(express.static(path.join(__dirname, 'public')));
 
-// إعداد مسار الصفحة الرئيسية
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'views', 'index.html'));
+// استيراد الراوتر وربطه مع التطبيق
+const router = require('./routes/router');
+app.use(router);
+
+// استيراد مسار YouTube.js من المجلد routes
+const youtubeRouter = require('./routes/YouTube');
+app.use('/youtube', youtubeRouter); // ربط المسار الخاص بـ YouTube
+
+// مسار آخر للتأكد من أن التطبيق يدعم المزيد من المسارات
+const aboutRouter = require('./routes/about');
+app.use('/about', aboutRouter); // مسار صفحة "حول"
+
+// مسار لموارد JSON، على سبيل المثال للإعلانات أو البيانات التي تظهر في صفحة الهبوط
+app.get('/api/data', (req, res) => {
+  const data = {
+    title: 'مرحبًا بك في موقعنا!',
+    description: 'نحن نقدم خدمات رائعة!',
+  };
+  res.json(data);
 });
 
-// مسار صفحة "تواصل معنا"
-app.get('/contact', (req, res) => {
-  res.sendFile(path.join(__dirname, 'views', 'contact.html'));
+// مثال على مسار يتطلب تحقق من Firebase قبل الوصول
+app.get('/secure-data', (req, res) => {
+  const user = firebase.auth().currentUser;
+  if (user) {
+    res.json({ message: 'تم الوصول بنجاح إلى البيانات المحمية' });
+  } else {
+    res.status(403).json({ message: 'ليس لديك صلاحية الوصول' });
+  }
 });
 
-// مسار صفحة "حول"
-app.get('/about', (req, res) => {
-  res.sendFile(path.join(__dirname, 'views', 'about.html'));
-});
-
-// مسار تسجيل المستخدم
-app.post('/register', async (req, res) => {
+// مسار لتسجيل الدخول باستخدام Firebase Authentication
+app.post('/login', (req, res) => {
   const { email, password } = req.body;
-
-  try {
-    const userRecord = await firebase.auth().createUser({
-      email,
-      password,
-    });
-
-    res.status(201).json({ message: 'User registered successfully!', user: userRecord });
-  } catch (error) {
-    res.status(400).json({ message: `Error registering user: ${error.message}` });
-  }
-});
-
-// مسار تسجيل الدخول
-app.post('/login', async (req, res) => {
-  const { email, password } = req.body;
-
-  try {
-    const user = await firebase.auth().getUserByEmail(email);
-
-    // ملاحظة: Firebase Authentication لا يدير التحقق من كلمة المرور هنا مباشرة.
-    // نحتاج إلى التحقق من كلمة المرور على الجهة الأمامية باستخدام Firebase SDK
-    // قم بدمج الكود في التطبيق الأمامي للتحقق من كلمة المرور مباشرة مع Firebase
-
-    res.json({ message: 'User found!', user });
-  } catch (error) {
-    res.status(404).json({ message: `User not found: ${error.message}` });
-  }
-});
-
-// مسار للتحقق من صحة التوكن (محمي)
-app.get('/profile', verifyToken, (req, res) => {
-  res.json({ message: 'Welcome to your profile!' });
-});
-
-// دالة للتحقق من صحة التوكن
-function verifyToken(req, res, next) {
-  const token = req.header('Authorization');
-  if (!token) {
-    return res.status(401).json({ message: 'Access denied, no token provided!' });
-  }
-
-  firebase.auth().verifyIdToken(token)
-    .then(decodedToken => {
-      req.userId = decodedToken.uid;
-      next();
+  firebase.auth().signInWithEmailAndPassword(email, password)
+    .then(userCredential => {
+      const user = userCredential.user;
+      res.json({ message: 'تم تسجيل الدخول بنجاح', user });
     })
     .catch(error => {
-      res.status(400).json({ message: 'Invalid token!' });
+      res.status(400).json({ message: 'خطأ في تسجيل الدخول', error: error.message });
     });
-}
+});
+
+// مسار لإرسال رسالة عبر البريد الإلكتروني باستخدام Firebase
+app.post('/send-email', (req, res) => {
+  const { to, subject, message } = req.body;
+  // هنا يمكن إضافة منطق إرسال البريد الإلكتروني باستخدام Firebase أو خدمة أخرى
+  res.json({ message: 'تم إرسال البريد الإلكتروني بنجاح', to, subject });
+});
 
 // بدء الخادم على المنفذ المحدد
 app.listen(port, () => {
-  console.log(`Server is running on http://localhost:${port}`);
+  console.log(`الخادم يعمل على http://localhost:${port}`);
 });
