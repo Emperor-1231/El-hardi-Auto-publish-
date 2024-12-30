@@ -1,3 +1,4 @@
+// الانتظار حتى تحميل الصفحة بالكامل
 document.addEventListener('DOMContentLoaded', () => {
   // تحديد الأزرار والعناصر التي ستتفاعل معها
   const loginWithGoogleBtn = document.querySelector('#login-google');
