@@ -5,31 +5,54 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>{{ title }} | El hardi Auto publish</title> <!-- استخدام المتغير 'title' لتحديد عنوان الصفحة -->
-    <link rel="stylesheet" href="/public/style.css">
+    <title>الهيكل الأساسي | El hardi Auto publish</title>
+    <link rel="stylesheet" href="public/style.css">
 </head>
-<body>
-    <header>
-        <h1>مرحبًا بك في El hardi Auto publish</h1>
+
+<body class="loading">
+
+    <!-- شاشة التحميل -->
+    <div class="loader">
+        <div class="spinner"></div>
+    </div>
+
+    <!-- تضمين الـ nav و header -->
+    <div class="nav">
+        <!-- نسخ محتوى nav.html هنا -->
         <nav>
             <ul>
-                <li><a href="/index">الصفحة الرئيسية</a></li>
-                <li><a href="/contact">اتصل بنا</a></li>
-                <li><a href="/faq">الأسئلة الشائعة</a></li>
-                <li><a href="/services">خدماتنا</a></li>
+                <li><a href="/index.html">الصفحة الرئيسية</a></li>
+                <li><a href="/about.html">من نحن</a></li>
+                <li><a href="/services.html">خدماتنا</a></li>
+                <li><a href="/faq.html">الأسئلة الشائعة</a></li>
+                <li><a href="/contact.html">اتصل بنا</a></li>
             </ul>
         </nav>
-    </header>
+    </div>
 
-    <main>
-        <!-- سيتم إدراج المحتوى الخاص بكل صفحة هنا -->
-        <div>
-            {{ content }} <!-- سيتم تضمين محتوى كل صفحة هنا -->
-        </div>
-    </main>
+    <div class="header">
+        <!-- نسخ محتوى header.html هنا -->
+        <header>
+            <h1>مرحبًا بك في El hardi Auto publish</h1>
+            <p>نحن هنا لنساعدك في أتمتة عملية نشر المحتوى الخاص بك بطريقة ذكية وسهلة. استمتع بتجربة النشر التلقائي على منصات متعددة بكفاءة عالية.</p>
+        </header>
+    </div>
 
-    <footer>
-        <p>&copy; 2024 El hardi Auto publish. جميع الحقوق محفوظة.</p>
-    </footer>
+    <section class="layout">
+        <h2>الهيكل الأساسي</h2>
+        <p>هذه هي الصفحة التي تحتوي على هيكل الموقع الذي ستتمكن من خلاله من استكشاف وتنظيم جميع خدماتنا ومواردنا.</p>
+    </section>
+
+    <!-- تضمين الـ footer -->
+    <div class="footer">
+        <!-- نسخ محتوى footer.html هنا -->
+        <footer>
+            <p>&copy; 2024 El hardi Auto publish. جميع الحقوق محفوظة. تم التطوير بواسطة <strong>الإمبراطور عبد الرحمـٰن الهردي</strong>.</p>
+            <p>لمزيد من المعلومات، تواصل معنا عبر <a href="/contact.html">اتصل بنا</a>.</p>
+        </footer>
+    </div>
+
+    <script src="public/script.js"></script>
+
 </body>
 </html>
