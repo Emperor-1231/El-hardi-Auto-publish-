@@ -1,0 +1,35 @@
+<!-- layout.html -->
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{{ title }} | El hardi Auto publish</title> <!-- استخدام المتغير 'title' لتحديد عنوان الصفحة -->
+    <link rel="stylesheet" href="/public/style.css">
+</head>
+<body>
+    <header>
+        <h1>مرحبًا بك في El hardi Auto publish</h1>
+        <nav>
+            <ul>
+                <li><a href="/index">الصفحة الرئيسية</a></li>
+                <li><a href="/contact">اتصل بنا</a></li>
+                <li><a href="/faq">الأسئلة الشائعة</a></li>
+                <li><a href="/services">خدماتنا</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <!-- سيتم إدراج المحتوى الخاص بكل صفحة هنا -->
+        <div>
+            {{ content }} <!-- سيتم تضمين محتوى كل صفحة هنا -->
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 El hardi Auto publish. جميع الحقوق محفوظة.</p>
+    </footer>
+</body>
+</html>
