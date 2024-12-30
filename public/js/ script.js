@@ -1,84 +1,60 @@
-// إعداد Firebase
-import { initializeApp } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-app.js";
-import { getAuth, signInWithPopup, GoogleAuthProvider, signOut } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-auth.js";
+// انتظر تحميل DOM بالكامل قبل تنفيذ أي أكواد
+document.addEventListener('DOMContentLoaded', () => {
+  // جلب العناصر الضرورية
+  const loginWithGoogleBtn = document.querySelector('#login-google');
+  const loginWithEmailBtn = document.querySelector('#login-email');
+  const infoSection = document.querySelector('.info');
+  const heroSection = document.querySelector('.hero');
 
-// تكوين Firebase
-const firebaseConfig = {
-  apiKey: "AIzaSyC0jbvoclp54WAeKPEjwL9TqLme1FETK9Q",
-  authDomain: "el-hardi-auto-publish.firebaseapp.com",
-  projectId: "el-hardi-auto-publish",
-  storageBucket: "el-hardi-auto-publish.firebasestorage.app",
-  messagingSenderId: "804047155992",
-  appId: "1:804047155992:web:408a8aea01af1481dca46d"
-};
+  // التعامل مع زر تسجيل الدخول باستخدام جوجل
+  loginWithGoogleBtn.addEventListener('click', (event) => {
+    event.preventDefault();
+    alert('تم الضغط على زر تسجيل الدخول باستخدام جوجل');
+    // هنا يمكن إضافة الكود الخاص بتسجيل الدخول عبر جوجل
+  });
 
-// تهيئة التطبيق
-const app = initializeApp(firebaseConfig);
+  // التعامل مع زر تسجيل الدخول باستخدام البريد الإلكتروني
+  loginWithEmailBtn.addEventListener('click', (event) => {
+    event.preventDefault();
+    alert('تم الضغط على زر تسجيل الدخول باستخدام البريد الإلكتروني');
+    // هنا يمكن إضافة الكود الخاص بتسجيل الدخول عبر البريد الإلكتروني
+  });
 
-// إعداد المصادقة
-const auth = getAuth();
+  // إضافة تأثير عند التمرير على قسم المعلومات
+  window.addEventListener('scroll', () => {
+    let scrollPosition = window.scrollY;
 
-// تخصيص واجهة المستخدم
-const googleSignInButton = document.getElementById("google-sign-in");
-const emailSignInButton = document.getElementById("email-sign-in");
-const signOutButton = document.getElementById("sign-out");
-const userInfoSection = document.getElementById("user-info");
-const authContainer = document.getElementById("auth-container");
-const userNameElement = document.getElementById("user-name");
+    // إذا كانت المسافة المقطوعة على الصفحة أكبر من 200px، يتم إضافة تأثير
+    if (scrollPosition > 200) {
+      infoSection.classList.add('fade-in');
+    } else {
+      infoSection.classList.remove('fade-in');
+    }
+  });
 
-// دالة لتحديث واجهة المستخدم بناءً على حالة تسجيل الدخول
-function updateUI(user) {
-  if (user) {
-    // إظهار معلومات المستخدم
-    userNameElement.textContent = user.displayName || "مستخدم غير معرف";
-    userInfoSection.style.display = "block";
-    authContainer.style.display = "none";
-  } else {
-    // إخفاء معلومات المستخدم وإظهار زر التسجيل
-    userInfoSection.style.display = "none";
-    authContainer.style.display = "block";
-  }
-}
+  // إضافة تأثير عند التمرير على قسم الهيرو
+  heroSection.addEventListener('mouseover', () => {
+    heroSection.style.backgroundColor = '#2980b9'; // تغيير اللون عند المرور
+    heroSection.style.transition = 'background-color 0.3s ease';
+  });
 
-// دالة لتسجيل الدخول باستخدام جوجل
-googleSignInButton.addEventListener("click", () => {
-  const provider = new GoogleAuthProvider();
-  signInWithPopup(auth, provider)
-    .then((result) => {
-      const user = result.user;
-      updateUI(user);
-    })
-    .catch((error) => {
-      console.error("Error signing in with Google:", error);
+  heroSection.addEventListener('mouseout', () => {
+    heroSection.style.backgroundColor = '#3498db'; // العودة إلى اللون الأصلي
+  });
+
+  // إضافة وظيفة لتنقل المستخدم بشكل سلس عبر الأقسام
+  const navLinks = document.querySelectorAll('header nav ul li a');
+  
+  navLinks.forEach(link => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      const targetId = link.getAttribute('href').substring(1);
+      const targetSection = document.getElementById(targetId);
+
+      window.scrollTo({
+        top: targetSection.offsetTop,
+        behavior: 'smooth'
+      });
     });
-});
-
-// دالة لتسجيل الخروج
-signOutButton.addEventListener("click", () => {
-  signOut(auth)
-    .then(() => {
-      updateUI(null);
-    })
-    .catch((error) => {
-      console.error("Error signing out:", error);
-    });
-});
-
-// دالة لتسجيل الدخول باستخدام البريد الإلكتروني وكلمة المرور
-emailSignInButton.addEventListener("click", () => {
-  const email = prompt("أدخل بريدك الإلكتروني:");
-  const password = prompt("أدخل كلمة المرور:");
-  auth.signInWithEmailAndPassword(email, password)
-    .then((userCredential) => {
-      const user = userCredential.user;
-      updateUI(user);
-    })
-    .catch((error) => {
-      console.error("Error signing in with email:", error);
-    });
-});
-
-// التحقق من حالة تسجيل الدخول عند تحميل الصفحة
-auth.onAuthStateChanged((user) => {
-  updateUI(user);
+  });
 });
