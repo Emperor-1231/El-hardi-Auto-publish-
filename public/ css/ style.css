@@ -1,149 +1,131 @@
-/* التنسيق الأساسي */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
+/* إعدادات الصفحة بشكل عام */
 body {
     font-family: 'Arial', sans-serif;
-    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
     background-color: #f4f4f4;
-    color: #333;
 }
 
-header {
-    background-color: #333;
-    color: white;
-    padding: 20px;
-    text-align: center;
+/* تأثيرات التمرير للصور والمحتوى */
+img {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
 }
 
-header .logo-container img {
-    width: 150px;
+img.visible {
+    opacity: 1;
+    transform: translateY(0);
 }
 
-header .navbar {
-    margin-top: 15px;
-}
-
-header .navbar ul {
-    list-style: none;
-}
-
-header .navbar ul li {
-    display: inline-block;
-    margin: 0 15px;
-}
-
-header .navbar ul li a {
-    color: white;
-    text-decoration: none;
-    font-weight: bold;
-}
-
-header .auth-buttons button {
-    background-color: #4CAF50;
-    color: white;
-    padding: 10px 20px;
+/* تأثيرات الأزرار */
+button {
+    position: relative;
+    overflow: hidden;
     border: none;
-    margin-top: 10px;
-    cursor: pointer;
-    font-size: 16px;
-}
-
-header .auth-buttons button:hover {
-    background-color: #45a049;
-}
-
-/* Hero section */
-.hero {
-    background-image: url('/images/hero-bg.jpg');
-    background-size: cover;
-    background-position: center;
-    height: 400px;
-    color: white;
-    text-align: center;
-    padding-top: 150px;
-}
-
-.hero h1 {
-    font-size: 3rem;
-    margin-bottom: 20px;
-}
-
-.hero p {
-    font-size: 1.5rem;
-    margin-bottom: 30px;
-}
-
-.hero .cta-btn {
     background-color: #4CAF50;
     color: white;
-    padding: 12px 30px;
-    text-decoration: none;
-    font-size: 18px;
+    padding: 15px 32px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    outline: none;
 }
 
-.hero .cta-btn:hover {
-    background-color: #45a049;
+button::after {
+    content: '';
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.6);
+    animation: ripple 0.6s linear;
+    transform: scale(0);
+    pointer-events: none;
 }
 
-/* Features section */
-.features {
-    padding: 50px 0;
-    text-align: center;
+button:active::after {
+    transform: scale(4);
+    animation: ripple 0.6s linear;
 }
 
-.features h2 {
-    font-size: 2.5rem;
-    margin-bottom: 30px;
+@keyframes ripple {
+    to {
+        transform: scale(4);
+        opacity: 0;
+    }
 }
 
-.feature {
-    display: inline-block;
-    width: 30%;
-    padding: 20px;
-    margin: 0 10px;
-    background-color: #fff;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+/* شاشة التحميل */
+.loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
 }
 
-.feature h3 {
-    font-size: 1.8rem;
-    margin-bottom: 15px;
+.loader .spinner {
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid #4CAF50;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 2s linear infinite;
 }
 
-.feature p {
-    font-size: 1.2rem;
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }
 
-/* About section */
-.about {
-    padding: 50px 20px;
-    background-color: #f4f4f4;
-    text-align: center;
-}
-
-.about h2 {
-    font-size: 2.5rem;
-    margin-bottom: 30px;
-}
-
-.about p {
-    font-size: 1.2rem;
-    max-width: 800px;
-    margin: 0 auto;
-}
-
-/* Footer */
-footer {
-    background-color: #333;
+/* تأثير البارالاكيس */
+.parallax {
+    background-image: url('path/to/your-image.jpg');
+    height: 100vh;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     color: white;
-    padding: 20px;
     text-align: center;
 }
 
-footer p {
-    font-size: 1rem;
+/* الحركات الإبداعية */
+h1, h2, h3 {
+    position: relative;
+    color: #333;
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+h1:hover, h2:hover, h3:hover {
+    color: #4CAF50;
+    cursor: pointer;
+}
+
+h1::before, h2::before, h3::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    background-color: #4CAF50;
+    bottom: 0;
+    left: 0;
+    transform: scaleX(0);
+    transform-origin: bottom right;
+    transition: transform 0.3s ease-out;
+}
+
+h1:hover::before, h2:hover::before, h3:hover::before {
+    transform: scaleX(1);
+    transform-origin: bottom left;
 }
