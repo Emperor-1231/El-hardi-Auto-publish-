@@ -1,0 +1,59 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "name": "عبد الرحمـن الهردي",
+      "email": "abdoakojdad@gmail.com",
+      "subscription_plan": "premium",
+      "preferences": {
+        "platforms": ["Facebook", "Instagram"],
+        "time_schedule": "12:00 PM"
+      },
+      "registration_date": "2024-01-01"
+    },
+    {
+      "id": 2,
+      "name": "فاطمة الزهراء",
+      "email": "fatima@example.com",
+      "subscription_plan": "basic",
+      "preferences": {
+        "platforms": ["Twitter", "LinkedIn"],
+        "time_schedule": "6:00 PM"
+      },
+      "registration_date": "2024-01-02"
+    },
+    {
+      "id": 3,
+      "name": "إلياس الشرداقي",
+      "email": "ilyasselch@example.com",
+      "subscription_plan": "enterprise",
+      "preferences": {
+        "platforms": ["Facebook", "Twitter", "Instagram", "LinkedIn"],
+        "time_schedule": "8:00 AM"
+      },
+      "registration_date": "2024-02-15"
+    },
+    {
+      "id": 4,
+      "name": "أسماء المتيجي",
+      "email": "asmae@example.com",
+      "subscription_plan": "premium",
+      "preferences": {
+        "platforms": ["Facebook", "Instagram"],
+        "time_schedule": "9:00 PM"
+      },
+      "registration_date": "2024-02-20"
+    },
+    {
+      "id": 5,
+      "name": "حاجبة حاجبة",
+      "email": "hajiba@example.com",
+      "subscription_plan": "basic",
+      "preferences": {
+        "platforms": ["Twitter"],
+        "time_schedule": "3:00 PM"
+      },
+      "registration_date": "2024-03-10"
+    }
+  ]
+}
