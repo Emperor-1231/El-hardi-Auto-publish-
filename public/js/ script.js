@@ -1,6 +1,6 @@
 // الانتظار حتى تحميل الصفحة بالكامل
 document.addEventListener('DOMContentLoaded', () => {
-  // عناصر الصفحة الأساسية للتفاعل
+  // تعريف العناصر الرئيسية
   const submitButton = document.querySelector('#submit-button');
   const scrollableSections = document.querySelectorAll('.scrollable');
   const dynamicText = document.querySelectorAll('.dynamic-text');
@@ -8,193 +8,139 @@ document.addEventListener('DOMContentLoaded', () => {
   const marqueeText = document.querySelector('.marquee-text');
   const particlesContainer = document.querySelector('#particles-js');
   const navbarLinks = document.querySelectorAll('.navbar-link');
-  const interactiveElements = document.querySelectorAll('.interactive-element');
-  const typingText = document.querySelector('.animated-text');
+  const themeToggle = document.querySelector('#theme-toggle'); // تبديل الوضع
+  const notificationsContainer = document.querySelector('#notifications-container');
+  const chatWindow = document.querySelector('#chat-window');
+  const chartCanvas = document.querySelector('#chart'); // للرسوم البيانية
+  const timerElement = document.querySelector('#timer'); // المؤقت
 
-  // عناصر للتحكم في الصوتيات
-  const clickSound = new Howl({
-    src: ['click.mp3'],
-    autoplay: false,
-    loop: false,
-    volume: 1.0,
+  // ** 1. نظام الوضع الليلي والنهاري **
+  themeToggle.addEventListener('click', () => {
+    document.body.classList.toggle('dark-mode');
+    localStorage.setItem('theme', document.body.classList.contains('dark-mode') ? 'dark' : 'light');
+    showNotification('تم تغيير الوضع بنجاح!');
   });
 
-  const hoverSound = new Howl({
-    src: ['hover.mp3'],
-    autoplay: false,
-    loop: false,
-    volume: 0.8,
-  });
-
-  // تعيين الألوان الرئيسية باستخدام CSS Variables
-  document.documentElement.style.setProperty('--primary-color', '#4CAF50');
-  document.documentElement.style.setProperty('--secondary-color', '#8BC34A');
-  document.documentElement.style.setProperty('--text-color', '#333');
-
-  // إضافة تأثيرات الأزرار المتقدمة
-  submitButton.addEventListener('mouseenter', () => {
-    submitButton.classList.add('btn-hover');
-    hoverSound.play();
-  });
-
-  submitButton.addEventListener('mouseleave', () => {
-    submitButton.classList.remove('btn-hover');
-  });
-
-  // عند الضغط على زر الإرسال
-  submitButton.addEventListener('click', (e) => {
-    e.preventDefault();
-    clickSound.play();
-    showModal('تم إرسال الطلب بنجاح!');
-  });
-
-  // إضافة تأثيرات ديناميكية على النصوص
-  dynamicText.forEach((textElement) => {
-    textElement.addEventListener('mouseover', () => {
-      textElement.classList.add('highlight-text');
-    });
-
-    textElement.addEventListener('mouseout', () => {
-      textElement.classList.remove('highlight-text');
-    });
-  });
-
-  // تأثير النصوص المتحركة (Marquee Text)
-  let currentIndex = 0;
-  const textList = [
-    'مرحبا بكم في موقعنا!',
-    'أفضل تجربة تفاعلية هنا.',
-    'ابدأ رحلتك معنا الآن!',
-  ];
-
-  function updateMarquee() {
-    marqueeText.innerText = textList[currentIndex];
-    currentIndex = (currentIndex + 1) % textList.length;
+  // استعادة الوضع من التخزين المحلي
+  const savedTheme = localStorage.getItem('theme');
+  if (savedTheme) {
+    document.body.classList.toggle('dark-mode', savedTheme === 'dark');
   }
 
-  setInterval(updateMarquee, 3000);
+  // ** 2. الإشعارات الديناميكية **
+  function showNotification(message) {
+    const notification = document.createElement('div');
+    notification.classList.add('notification');
+    notification.innerText = message;
+    notificationsContainer.appendChild(notification);
 
-  // تأثير التمرير السلس للنوافذ المتحركة
-  window.addEventListener('scroll', () => {
-    scrollableSections.forEach((section) => {
-      let sectionTop = section.offsetTop;
-      let scrollPosition = window.scrollY;
+    setTimeout(() => {
+      notification.remove();
+    }, 3000); // تختفي بعد 3 ثوانٍ
+  }
 
-      if (scrollPosition > sectionTop - 200) {
-        section.classList.add('fade-in');
-      } else {
-        section.classList.remove('fade-in');
+  // ** 3. إضافة المؤقت **
+  let timeRemaining = 60; // 60 ثانية
+  const timerInterval = setInterval(() => {
+    if (timeRemaining > 0) {
+      timerElement.innerText = `الوقت المتبقي: ${timeRemaining--} ثانية`;
+    } else {
+      clearInterval(timerInterval);
+      showNotification('انتهى الوقت!');
+    }
+  }, 1000);
+
+  // ** 4. نظام دردشة بسيط **
+  document.querySelector('#send-message').addEventListener('click', () => {
+    const userMessage = document.querySelector('#chat-input').value;
+    if (userMessage.trim()) {
+      addChatMessage('أنت', userMessage);
+      setTimeout(() => addChatMessage('المساعد', 'شكراً لرسالتك!'), 1000);
+    }
+  });
+
+  function addChatMessage(sender, message) {
+    const chatMessage = document.createElement('div');
+    chatMessage.classList.add('chat-message', sender === 'أنت' ? 'user-message' : 'assistant-message');
+    chatMessage.innerText = `${sender}: ${message}`;
+    chatWindow.appendChild(chatMessage);
+    chatWindow.scrollTop = chatWindow.scrollHeight; // للتمرير التلقائي
+  }
+
+  // ** 5. إضافة رسوم بيانية ديناميكية **
+  if (chartCanvas) {
+    const ctx = chartCanvas.getContext('2d');
+    new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: ['يناير', 'فبراير', 'مارس', 'أبريل', 'مايو'],
+        datasets: [{
+          label: 'الأداء الشهري',
+          data: [10, 20, 15, 30, 25],
+          borderColor: 'rgba(75, 192, 192, 1)',
+          borderWidth: 2,
+          fill: false
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: {
+            display: true
+          }
+        }
       }
     });
-
-    animatedElements.forEach((element) => {
-      addScrollEffect(element, 'show');
-    });
-  });
-
-  // تأثيرات التمرير المتقدمة
-  const scrollSpeed = 0.3;
-  window.addEventListener('scroll', () => {
-    document.querySelectorAll('.parallax').forEach((element) => {
-      let offset = window.scrollY * scrollSpeed;
-      element.style.backgroundPosition = `center ${offset}px`;
-    });
-  });
-
-  // تحسين تجربة النصوص باستخدام CSS Keyframes
-  if (typingText) {
-    typingText.classList.add('typing');
   }
 
-  // دالة لإظهار نافذة منبثقة
-  function showModal(message) {
-    const modal = document.createElement('div');
-    modal.classList.add('modal');
-    modal.innerHTML = `
-      <div class="modal-content">
-        <span class="close-btn">&times;</span>
-        <p>${message}</p>
-      </div>
-    `;
-    document.body.appendChild(modal);
+  // ** 6. خرائط تفاعلية باستخدام Leaflet.js **
+  const map = L.map('map').setView([34.020882, -6.841650], 13); // إحداثيات افتراضية
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+  }).addTo(map);
+  L.marker([34.020882, -6.841650]).addTo(map).bindPopup('مرحبًا بكم هنا!').openPopup();
 
-    const closeBtn = modal.querySelector('.close-btn');
-    closeBtn.addEventListener('click', () => {
-      modal.remove();
-    });
-  }
-
-  // تحسين تجربة الحركات باستخدام GSAP و ScrollTrigger
-  gsap.registerPlugin(ScrollTrigger);
-
-  gsap.from('.fade-in-on-scroll', {
-    opacity: 0,
-    y: 50,
-    duration: 1.5,
-    scrollTrigger: {
-      trigger: '.fade-in-on-scroll',
-      start: 'top 80%',
-      end: 'bottom top',
-      toggleActions: 'play none none none',
-    },
-  });
-
-  // تحسين تجربة التفاعل باستخدام Particles.js
+  // ** 7. تأثيرات Particles.js للخلفية **
   if (particlesContainer) {
-    particlesJS('particles-js', {
+    particlesJS("particles-js", {
       particles: {
         number: {
           value: 100,
           density: {
             enable: true,
-            value_area: 1000,
-          },
+            value_area: 1000
+          }
         },
-        color: {
-          value: '#ffffff',
-        },
-        shape: {
-          type: 'circle',
-        },
-        opacity: {
-          value: 0.7,
-          random: true,
-        },
-        size: {
-          value: 4,
-          random: true,
-        },
-      },
+        color: { value: "#ffffff" },
+        shape: { type: "circle" },
+        opacity: { value: 0.5, random: true },
+        size: { value: 3, random: true }
+      }
     });
   }
 
-  // إضافة تأثير Parallax على العناصر التفاعلية
-  document.addEventListener('mousemove', (e) => {
-    interactiveElements.forEach((element) => {
-      const x = (e.clientX / window.innerWidth) * 10;
-      const y = (e.clientY / window.innerHeight) * 10;
-      element.style.transform = `translate(${x}%, ${y}%)`;
-    });
+  // ** 8. تأثيرات تفاعلية مع الأصوات **
+  const clickSound = new Howl({ src: ['click.mp3'], volume: 0.5 });
+  document.querySelectorAll('button').forEach(button => {
+    button.addEventListener('click', () => clickSound.play());
   });
 
-  // تحسين الأداء باستخدام requestAnimationFrame
-  let lastKnownScrollPosition = 0;
-  let ticking = false;
-
-  window.addEventListener('scroll', () => {
-    lastKnownScrollPosition = window.scrollY;
-
-    if (!ticking) {
-      window.requestAnimationFrame(() => {
-        handleScroll(lastKnownScrollPosition);
-        ticking = false;
-      });
-
-      ticking = true;
+  // ** 9. ألعاب أو ألغاز صغيرة **
+  const puzzleAnswer = '1234';
+  document.querySelector('#puzzle-submit').addEventListener('click', () => {
+    const answer = document.querySelector('#puzzle-input').value;
+    if (answer === puzzleAnswer) {
+      showNotification('الإجابة صحيحة!');
+    } else {
+      showNotification('حاول مرة أخرى!');
     }
   });
 
-  function handleScroll(scrollPos) {
-    // أكواد تحسين الأداء هنا
-  }
+  // ** 10. تحسين التمرير (Smooth Scrolling) **
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      e.preventDefault();
+      document.querySelector(this.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
+    });
+  });
 });
