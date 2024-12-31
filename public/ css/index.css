@@ -1,0 +1,313 @@
+/* إعدادات الصفحة بشكل عام */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    background-color: #f4f4f4;
+    direction: rtl; /* تحديد الاتجاه من اليمين لليسار */
+}
+
+/* تأثيرات التمرير للصور والمحتوى */
+img {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+img.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* شاشة التحميل */
+.loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.loader .spinner {
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid #4CAF50;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* تنسيق الشريط العلوي (Navbar) */
+.nav {
+    background-color: #333;
+    color: white;
+}
+
+.nav nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+}
+
+.nav nav ul li {
+    margin: 10px 20px;
+}
+
+.nav nav ul li a {
+    text-decoration: none;
+    color: white;
+    font-size: 18px;
+    padding: 10px 15px;
+    display: block;
+    transition: background-color 0.3s ease;
+}
+
+.nav nav ul li a:hover {
+    background-color: #4CAF50;
+}
+
+/* تنسيق الرأس (Header) */
+.header {
+    background-color: #4CAF50;
+    color: white;
+    text-align: center;
+    padding: 50px 20px;
+}
+
+.header h1 {
+    font-size: 36px;
+    margin-bottom: 15px;
+}
+
+.header p {
+    font-size: 18px;
+}
+
+/* تأثير البارالاكيس */
+.parallax {
+    background-image: url('public/images/banner.jpg');
+    height: 100vh;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    text-align: center;
+    padding: 20px;
+}
+
+.parallax h2 {
+    font-size: 30px;
+    margin: 0;
+}
+
+.parallax p {
+    font-size: 18px;
+}
+
+/* تنسيق الفوتر */
+.footer {
+    background-color: #333;
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+.footer p {
+    font-size: 14px;
+}
+
+.footer a {
+    color: #4CAF50;
+    text-decoration: none;
+}
+
+.footer a:hover {
+    text-decoration: underline;
+}
+
+/* تأثيرات الأزرار */
+button {
+    position: relative;
+    overflow: hidden;
+    border: none;
+    background-color: #4CAF50;
+    color: white;
+    padding: 15px 32px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    outline: none;
+}
+
+button::after {
+    content: '';
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.6);
+    animation: ripple 0.6s linear;
+    transform: scale(0);
+    pointer-events: none;
+}
+
+button:active::after {
+    transform: scale(4);
+    animation: ripple 0.6s linear;
+}
+
+@keyframes ripple {
+    to {
+        transform: scale(4);
+        opacity: 0;
+    }
+}
+
+/* التنسيقات الخاصة بالألوان والخلفيات */
+.bg-light {
+    background-color: #f9f9f9;
+}
+
+.bg-dark {
+    background-color: #333;
+    color: white;
+}
+
+/* تحسينات التنقل بين الأقسام */
+section {
+    padding: 40px 0;
+}
+
+/* إعدادات النموذج */
+.contact-form {
+    width: 80%;
+    max-width: 600px;
+    margin: 20px auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.contact-form label {
+    display: block;
+    margin: 10px 0 5px;
+}
+
+.contact-form input, .contact-form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.contact-form button {
+    background-color: #333;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.contact-form button:hover {
+    background-color: #555;
+}
+
+/* تحسينات النصوص والعناوين */
+h1, h2, h3 {
+    font-family: 'Arial', sans-serif;
+    color: #333;
+    transition: color 0.3s ease;
+}
+
+h1:hover, h2:hover, h3:hover {
+    color: #4CAF50;
+}
+
+/* إعدادات الروابط الاجتماعية */
+.social-links {
+    text-align: center;
+    margin-top: 30px;
+}
+
+.social-links ul {
+    list-style: none;
+    padding: 0;
+}
+
+.social-links li {
+    display: inline-block;
+    margin: 0 10px;
+}
+
+.social-links a {
+    text-decoration: none;
+    color: #fff;
+    font-weight: bold;
+    padding: 10px 20px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 200px;
+    height: 50px;
+    transition: background-color 0.3s ease;
+}
+
+.social-links a:hover {
+    opacity: 0.9;
+}
+
+.social-btn.instagram {
+    background-color: #E4405F; /* لون إنستغرام */
+}
+
+.social-btn.facebook {
+    background-color: #1877F2; /* لون فيسبوك */
+}
+
+.social-btn.twitter {
+    background-color: #1DA1F2; /* لون تويتر */
+}
+
+.social-btn.whatsapp {
+    background-color: #25D366; /* لون واتساب */
+}
+
+.social-btn.github {
+    background-color: #333; /* لون غيت هاب */
+}
+
+.social-btn.replit {
+    background-color: #667881; /* لون Replit */
+}
+
+.social-btn.linkedin {
+    background-color: #0077B5; /* لون لينكدإن */
+}
+
+.social-btn.email {
+    background-color: #D44638; /* لون الإيميل */
+}
+
+.social-btn i {
+    margin-right: 10px;
+}
