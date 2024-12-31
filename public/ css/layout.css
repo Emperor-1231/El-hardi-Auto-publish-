@@ -1,0 +1,110 @@
+/* layout.css */
+
+/* إعدادات عامة */
+body.loading {
+    overflow: hidden;
+}
+
+/* تصميم شاشة التحميل */
+.loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(255, 255, 255, 0.9);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.spinner {
+    border: 6px solid #f3f3f3; /* اللون الفاتح */
+    border-top: 6px solid #3498db; /* اللون الأزرق */
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* تصميم الـ nav */
+.nav {
+    background-color: #333;
+    padding: 10px 0;
+}
+
+.nav nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+}
+
+.nav nav ul li {
+    margin: 0 15px;
+}
+
+.nav nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+/* تصميم الـ header */
+.header {
+    background-color: #f4f4f4;
+    padding: 50px 0;
+    text-align: center;
+}
+
+.header h1 {
+    font-size: 36px;
+    color: #333;
+}
+
+.header p {
+    font-size: 18px;
+    color: #777;
+}
+
+/* تصميم الـ section الخاص بالهيكل الأساسي */
+.layout {
+    padding: 40px;
+    text-align: center;
+    background-color: #f9f9f9;
+}
+
+.layout h2 {
+    font-size: 32px;
+    color: #333;
+}
+
+.layout p {
+    font-size: 18px;
+    color: #555;
+}
+
+/* تصميم الـ footer */
+.footer {
+    background-color: #333;
+    color: white;
+    padding: 20px 0;
+    text-align: center;
+}
+
+.footer p {
+    font-size: 14px;
+    color: #bbb;
+}
+
+.footer a {
+    color: #3498db;
+    text-decoration: none;
+}
