@@ -1,0 +1,21 @@
+/* public/CSS/header.css */
+
+/* تخصيص مظهر الـ header */
+header {
+    background-color: #f4f4f4;  /* لون الخلفية */
+    padding: 20px;              /* التباعد داخل الـ header */
+    text-align: center;         /* محاذاة النص في الوسط */
+    border-bottom: 2px solid #ddd; /* إضافة حدود أسفل الـ header */
+}
+
+header h1 {
+    font-size: 36px;           /* حجم الخط للعنوان */
+    color: #333;               /* لون النص */
+    margin-bottom: 10px;       /* المسافة أسفل العنوان */
+}
+
+header p {
+    font-size: 18px;           /* حجم الخط للفقرات */
+    color: #666;               /* لون النص */
+    margin-top: 0;             /* إزالة المسافة العلوية */
+}
