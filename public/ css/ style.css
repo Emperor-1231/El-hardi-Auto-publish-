@@ -315,6 +315,116 @@ h1:hover::before, h2:hover::before, h3:hover::before {
     transform-origin: bottom left;
 }
 
+/* ===========================================
+   تأثيرات التمرير (Scroll Effects)
+=========================================== */
+
+/* تأثير التلاشي عند الظهور */
+.visible {
+    opacity: 1;
+    transition: opacity 1s ease-in-out;
+}
+
+/* تأثير الانزلاق من الأسفل عند الظهور */
+.animate-on-scroll {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 1s ease-out, transform 1s ease-out;
+}
+
+.visible.animate-on-scroll {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ===========================================
+   تأثيرات الحركة (Animation Effects)
+=========================================== */
+
+/* تأثير الانزلاق أو التحريك عند التمرير */
+.animate {
+    opacity: 0;
+    transform: translateY(30px); /* تحريك العنصر من الأسفل */
+    transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+}
+
+/* إظهار العنصر عند التمرير */
+.animate-on-scroll.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ===========================================
+   تأثيرات الأزرار عند التمرير أو النقر
+=========================================== */
+
+/* تأثير على الأزرار عند مرور المؤشر عليها */
+.hovered {
+    background-color: #ff6347; /* تغيير الخلفية إلى اللون الأحمر */
+    color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* إضافة ظل */
+    transition: all 0.3s ease;
+}
+
+/* تأثير عند النقر على الأزرار */
+.clicked {
+    transform: scale(0.95); /* جعل الزر يصغر قليلاً */
+    transition: transform 0.1s ease;
+}
+
+button.clicked {
+    transform: scale(1);
+}
+
+/* ===========================================
+   تأثيرات التمرير للـ Sticky Navigation
+=========================================== */
+
+/* التأثير الخاص بالـ sticky navigation */
+.sticky {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #333; /* تغيير الخلفية */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+/* إضافة تأثير التمرير للتنقل */
+.nav.sticky {
+    animation: slide-down 0.3s ease-in-out;
+}
+
+/* انزلاق الشريط العلوي عند تفعيل sticky */
+@keyframes slide-down {
+    from {
+        opacity: 0;
+        transform: translateY(-100%);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ===========================================
+   تأثيرات إخفاء العناصر
+=========================================== */
+
+/* إخفاء العناصر قبل ظهورها */
+.hidden {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s, transform 0.5s;
+}
+
+/* عند التمرير تظهر العناصر */
+.hidden.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
 /* إعدادات النموذج */
 .contact-form {
     width: 80%;
