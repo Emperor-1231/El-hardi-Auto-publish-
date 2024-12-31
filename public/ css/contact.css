@@ -1,0 +1,173 @@
+/* reset default browser margins */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+    line-height: 1.6;
+}
+
+/* حاوية الصفحة */
+.loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* شاشة التحميل */
+.loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.spinner {
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid #3498db;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* تنسيق الـ nav */
+.nav {
+    background-color: #333;
+    padding: 10px 0;
+}
+
+.nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+}
+
+.nav ul li {
+    margin: 0 15px;
+}
+
+.nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    transition: color 0.3s ease;
+}
+
+.nav ul li a:hover {
+    color: #3498db;
+}
+
+/* تنسيق الهيدر */
+.header {
+    background-color: #fff;
+    padding: 30px 20px;
+    text-align: center;
+    border-bottom: 2px solid #e1e1e1;
+}
+
+.header h1 {
+    font-size: 36px;
+    color: #333;
+}
+
+.header p {
+    font-size: 18px;
+    color: #666;
+}
+
+/* تنسيق نموذج الاتصال */
+.contact {
+    padding: 40px 20px;
+    background-color: #fff;
+    margin: 20px auto;
+    max-width: 800px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.contact h2 {
+    font-size: 28px;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.contact p {
+    font-size: 18px;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+/* تنسيق الحقول */
+form label {
+    font-size: 18px;
+    color: #333;
+    margin-bottom: 5px;
+    display: inline-block;
+}
+
+form input,
+form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 2px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+    color: #333;
+}
+
+form input:focus,
+form textarea:focus {
+    border-color: #3498db;
+    outline: none;
+}
+
+/* تنسيق زر الإرسال */
+.submit-btn {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    padding: 15px 20px;
+    font-size: 18px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.submit-btn:hover {
+    background-color: #2980b9;
+}
+
+/* تنسيق الفوتر */
+.footer {
+    background-color: #333;
+    color: white;
+    padding: 20px 0;
+    text-align: center;
+}
+
+.footer a {
+    color: #3498db;
+    text-decoration: none;
+}
+
+.footer a:hover {
+    text-decoration: underline;
+}
